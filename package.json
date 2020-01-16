@@ -9,6 +9,10 @@
   "dependencies": {
     "core-js": "^3.4.4",
     "vis": "^4.21.0-EOL",
+    "vis-data": "^6.3.3",
+    "vis-graph3d": "^5.4.3",
+    "vis-network": "^6.5.2",
+    "vis-timeline": "^6.4.0",
     "vue": "^2.6.10",
     "vuex": "^3.1.2"
   },
