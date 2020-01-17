@@ -8,8 +8,8 @@
 
 <script>
 
-import vis from 'vis'
-const json_data = require('../data');
+import vis from 'vis-timeline/dist/vis-timeline-graph2d.min'
+const json_data = require('../data2');
 export default {
   name: 'app',
   data() {
@@ -22,18 +22,25 @@ export default {
     const container = this.$refs.cont;
     const dataset = new vis.DataSet(this.dataChart);
     const options = {
-      drawPoints: false,
+			drawPoints: {
+				style: 'circle' // square, circle
+			},
+			shaded: {
+				orientation: 'top' // top, bottom
+			},
       dataAxis: { visible: true },
       sort: true,
       autoResize: true,
-      interpolation: true,
-      moment: function(date) {
-        return vis.moment(date).utc();
-      },
-      locale: 'nl'
+      interpolation: false
     };
     let graph = new vis.Graph2d(container, dataset, options);
-    // let graph2d = new vis.Timeline(container, dataset, options);
+    graph.on('click', (event)=>{
+    	console.log(event);
+    });
+		graph.on('contextmenu', (props)=>{
+			console.log(props);
+			props.event.preventDefault();
+		});
   },
   methods: {
     getData() {
