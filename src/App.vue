@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <p>Выбери тип графика</p>
+
+    <VueSliderRange />
+
+
+
     <div class="controls-charts">
       <button @click="changeType('2d')"
               :style="{backgroundColor: typeChart === '2d' ? 'orange' : '#fff' }"
@@ -40,28 +45,36 @@
 
 <script>
 
-const json_data = require('../data2');
+const json_data = require('../testData');
+import moment from 'moment'
 import Chart2d from './components/Chart2d/Chart2d'
 import NetworkChart from './components/NetworkChart/NetworkChart'
 import TimeLineChart from './components/TimeLine/TimeLineChart'
+import VueSliderRange from './components/UI/vue-range-slider/VueRangeSlider'
 export default {
   name: 'app',
-	components: {Chart2d,NetworkChart,TimeLineChart},
+	components: {Chart2d,NetworkChart,TimeLineChart, VueSliderRange},
 	data() {
     return {
     	typeChart: '',
       dataChart2d: [],
+      groups2d: [
+		    { id: 0, content: "group0" },
+		    { id: 1, content: "group1" },
+		    { id: 2, content: "group2" }
+      ],
       options2d: {
 				drawPoints: {
-					style: 'circle' // square, circle
+					style: 'circle', // square, circle
+          size: 10
 				},
 				shaded: {
-					orientation: 'top' // top, bottom
+					orientation: 'bottom' // top, bottom
 				},
 				dataAxis: { visible: true },
 				sort: true,
 				autoResize: true,
-				interpolation: false
+				interpolation: true
       },
       nodesNetworkChart: [
 				{ id: 1, label: "Node 1" },
@@ -97,6 +110,11 @@ export default {
   },
   mounted() {
     this.getData();
+
+		// const test3 = moment(this.dataChart2d[0].x).valueOf();
+		// const test2 = moment(test3).format('YYYY-MM-DD');
+
+
   },
   methods: {
     getData() {
