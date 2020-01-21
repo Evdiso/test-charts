@@ -57,7 +57,7 @@
 				this.$emit('arraySource', this.arraySource);
       },
 			changeTypeChart({id, checked}) {
-				this.arrayTypeChart.forEach(item => item.id === id ? item.checked = checked : item.checked = !checked);
+				this.arrayTypeChart.forEach(item => item.id === id && item.checked !== checked ? item.checked = checked : item.checked = !checked);
 				this.$emit('arrayTypeChart', this.arrayTypeChart);
       }
     }

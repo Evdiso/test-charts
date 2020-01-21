@@ -13,7 +13,6 @@
 		mounted() {
 			if (this.data && this.data.length) {
 				let graph = new vis.Graph2d(this.$refs.chart2d, new vis.DataSet(this.data), new vis.DataSet(this.groups), this.options);
-
 				graph.on('click', (event)=>{
 					this.$emit('click', event)
 				});

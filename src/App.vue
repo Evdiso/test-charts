@@ -21,6 +21,7 @@
       :timeLineData="timeLineData"
       :nodesNetworkChart="nodesNetworkChart"
       :edgeNetworkChart="edgeNetworkChart"
+      @clickByChart2d="clickByChart2d($event)"
     />
   </div>
 </template>
@@ -68,7 +69,7 @@ export default {
     },
 		arrayTypeChart(array) {
     	const arrayTypes = array.filter(item => item.checked);
-    	this.typeChart = arrayTypes[0].text === 'Диаграмма' || arrayTypes[0].text === 'График' ? '2d' : '';
+    	// this.typeChart = arrayTypes[0].text === 'Диаграмма' ? 'bar' : '';
     }
   }
 }

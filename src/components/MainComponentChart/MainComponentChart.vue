@@ -59,6 +59,11 @@
 					editable: true
 				}
       }
+    },
+    methods: {
+			clickByChart2d(event) {
+				this.$emit('clickByChart2d', event);
+      }
     }
 	}
 </script>
