@@ -1,10 +1,26 @@
 <template>
   <div id="app">
-    <time-list-component />
-    <vue-slider-range
-      :valueProps="initialValueRangeSlider"
-      :dataSliderProps="initialDataRangeSlider"
-      @changeRange="changeRangeSlider($event)"
+    <controls-component
+      @arraySource="arraySource($event)"
+      @arrayTypeChart="arrayTypeChart($event)"
+    />
+    <div class="wrapper-change-date">
+      <time-list-component />
+      <date-picker />
+    </div>
+    <div class="wrapper-range-slider">
+      <vue-slider-range
+        :valueProps="initialValueRangeSlider"
+        :dataSliderProps="initialDataRangeSlider"
+        @changeRange="changeRangeSlider($event)"
+      />
+    </div>
+    <main-component-chart
+      :typeChart="typeChart"
+      :dataChart2d="dataChart2d"
+      :timeLineData="timeLineData"
+      :nodesNetworkChart="nodesNetworkChart"
+      :edgeNetworkChart="edgeNetworkChart"
     />
   </div>
 </template>
@@ -16,14 +32,18 @@ const chartTimeLineData = require('../chartTimeLineData');
 const chartNetworkData = require('../chartNetworkData');
 import VueSliderRange from './components/UI/VueRangeSlider/VueRangeSlider';
 import TimeListComponent from './components/TimeListComponent/TimeListComponent';
+import DatePicker from './components/UI/DatePicker/DatePicker';
+import ControlsComponent from './components/ControlsComponent/ControlsComponent';
+import MainComponentChart from './components/MainComponentChart/MainComponentChart'
+
 export default {
   name: 'app',
-	components: {VueSliderRange, TimeListComponent},
+	components: {VueSliderRange, TimeListComponent, DatePicker, ControlsComponent, MainComponentChart},
 	data() {
     return {
 			initialValueRangeSlider: [2013,2020],
 			initialDataRangeSlider: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
-    	typeChart: '',
+    	typeChart: '2d',
       dataChart2d: [],
 			timeLineData: [],
       nodesNetworkChart: [],
@@ -45,6 +65,10 @@ export default {
     },
 		changeRangeSlider(data) {
     	console.log(data);
+    },
+		arrayTypeChart(array) {
+    	const arrayTypes = array.filter(item => item.checked);
+    	this.typeChart = arrayTypes[0].text === 'Диаграмма' || arrayTypes[0].text === 'График' ? '2d' : '';
     }
   }
 }

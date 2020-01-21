@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="wrapper-main-chart">
     <Chart2d
       v-if="typeChart === '2d'"
       :data="dataChart2d"
+      :groups="groups2d"
       :options="options2d"
       @click="clickByChart2d($event)"
     />
@@ -27,9 +28,7 @@
 	export default {
 		name: "MainComponentChart",
     components: {Chart2d, NetworkChart, TimeLineChart},
-    props: {
-			typeChart: 'string'
-    },
+    props: ['typeChart', 'dataChart2d','timeLineData', 'nodesNetworkChart', 'edgeNetworkChart'],
     data() {
 			return {
 				groups2d: [

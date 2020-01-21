@@ -34,8 +34,8 @@
 				marks: [],
 				dotStyle: {
 					backgroundColor: '#fff',
-          border: '2px solid #013faa',
-          borderRadius: '50%'
+					border: '2px solid #013faa',
+					borderRadius: '50%'
         },
 				processStyle: {
 					backgroundColor: '#013faa',
