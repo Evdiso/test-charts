@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <VueSliderRange
+    <time-list-component />
+    <vue-slider-range
       :valueProps="initialValueRangeSlider"
       :dataSliderProps="initialDataRangeSlider"
       @changeRange="changeRangeSlider($event)"
@@ -13,10 +14,11 @@
 const chart2dData = require('../chart2dData');
 const chartTimeLineData = require('../chartTimeLineData');
 const chartNetworkData = require('../chartNetworkData');
-import VueSliderRange from './components/UI/vue-range-slider/VueRangeSlider'
+import VueSliderRange from './components/UI/vue-range-slider/VueRangeSlider';
+import TimeListComponent from './components/TimeListComponent/TimeListComponent';
 export default {
   name: 'app',
-	components: {VueSliderRange},
+	components: {VueSliderRange, TimeListComponent},
 	data() {
     return {
 			initialValueRangeSlider: [2013,2020],
