@@ -2,60 +2,46 @@
   <div id="app">
     <p>Выбери тип графика</p>
 
-    <VueSliderRange />
+    <VueSliderRange
+      :valueProps="initialValueRangeSlider"
+      :dataSliderProps="initialDataRangeSlider"
+      @changeRange="changeRangeSlider($event)"
+    />
 
 
 
-    <div class="controls-charts">
-      <button @click="changeType('2d')"
-              :style="{backgroundColor: typeChart === '2d' ? 'orange' : '#fff' }"
-      >
-        Chart 2d
-      </button>
-      <button @click="changeType('Network')"
-              :style="{backgroundColor: typeChart === 'Network' ? 'orange' : '#fff' }"
-      >
-        Chart Network
-      </button>
-      <button @click="changeType('TimeLine')"
-              :style="{backgroundColor: typeChart === 'TimeLine' ? 'orange' : '#fff' }"
-      >
-        Chart TimeLine
-      </button>
-    </div>
-    <Chart2d
-      v-if="typeChart === '2d'"
-      :data="dataChart2d"
-      :options="options2d"
-      @click="clickByChart2d($event)"
-    />
-    <NetworkChart
-      v-if="typeChart === 'Network'"
-      :nodes="nodesNetworkChart"
-      :options="optionsNetwork"
-      :edges="edgeNetworkChart"
-    />
-    <TimeLineChart
-      v-if="typeChart === 'TimeLine'"
-      :data="timeLineData"
-      :options="timeLineOptions"
-    />
+<!--    <div class="controls-charts">-->
+<!--      <button @click="changeType('2d')"-->
+<!--              :style="{backgroundColor: typeChart === '2d' ? 'orange' : '#fff' }"-->
+<!--      >-->
+<!--        Chart 2d-->
+<!--      </button>-->
+<!--      <button @click="changeType('Network')"-->
+<!--              :style="{backgroundColor: typeChart === 'Network' ? 'orange' : '#fff' }"-->
+<!--      >-->
+<!--        Chart Network-->
+<!--      </button>-->
+<!--      <button @click="changeType('TimeLine')"-->
+<!--              :style="{backgroundColor: typeChart === 'TimeLine' ? 'orange' : '#fff' }"-->
+<!--      >-->
+<!--        Chart TimeLine-->
+<!--      </button>-->
+<!--    </div>-->
+
   </div>
 </template>
 
 <script>
 
 const json_data = require('../testData');
-import moment from 'moment'
-import Chart2d from './components/Chart2d/Chart2d'
-import NetworkChart from './components/NetworkChart/NetworkChart'
-import TimeLineChart from './components/TimeLine/TimeLineChart'
 import VueSliderRange from './components/UI/vue-range-slider/VueRangeSlider'
 export default {
   name: 'app',
-	components: {Chart2d,NetworkChart,TimeLineChart, VueSliderRange},
+	components: {VueSliderRange},
 	data() {
     return {
+			initialValueRangeSlider: [2013,2020],
+			initialDataRangeSlider: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
     	typeChart: '',
       dataChart2d: [],
       groups2d: [
@@ -129,6 +115,9 @@ export default {
     },
 		clickByChart2d(event) {
     	console.log(event);
+    },
+		changeRangeSlider(data) {
+    	console.log(data);
     }
   }
 }
