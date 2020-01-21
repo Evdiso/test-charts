@@ -32,7 +32,33 @@
     },
     data() {
 			return {
-
+				groups2d: [
+					{ id: 0, content: "group0" },
+					{ id: 1, content: "group1" },
+					{ id: 2, content: "group2" }
+				],
+				options2d: {
+					drawPoints: {
+						style: 'circle', // square, circle
+						size: 10
+					},
+					shaded: {
+						orientation: 'bottom' // top, bottom
+					},
+					dataAxis: { visible: true },
+					sort: true,
+					autoResize: true,
+					interpolation: true
+				},
+				optionsNetwork: {
+					autoResize: true,
+					height: '600px',
+					width: '100%',
+					clickToUse: true
+				},
+				timeLineOptions: {
+					editable: true
+				}
       }
     }
 	}
