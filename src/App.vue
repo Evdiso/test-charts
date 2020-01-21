@@ -14,7 +14,7 @@
 const chart2dData = require('../chart2dData');
 const chartTimeLineData = require('../chartTimeLineData');
 const chartNetworkData = require('../chartNetworkData');
-import VueSliderRange from './components/UI/vue-range-slider/VueRangeSlider';
+import VueSliderRange from './components/UI/VueRangeSlider/VueRangeSlider';
 import TimeListComponent from './components/TimeListComponent/TimeListComponent';
 export default {
   name: 'app',
