@@ -1,28 +1,67 @@
 <template>
-  <v-date-picker
-    mode='range'
-    v-model=range
-    class="wrapper-input"
-    :popover="{ placement: 'bottom', visibility: 'click' }"
-    :input-props='{ placeholder: "дд.мм.гггг"}'>
-    <input class="vc-custom-styles"
-           slot-scope="{ inputProps, inputEvents }"
-           v-bind="inputProps"
-           v-on="inputEvents">
-  </v-date-picker>
+  <div>
+    <v-date-picker
+      mode='range'
+      v-model=range
+      class="wrapper-input"
+      :popover="{ placement: 'bottom', visibility: 'click' }"
+      :input-props='{ placeholder: "дд.мм.гггг - дд.мм.гггг"}'>
+      <input class="vc-custom-styles"
+             slot-scope="{inputProps, inputEvents}"
+             v-bind="inputProps"
+             v-on="inputEvents">
+    </v-date-picker>
+  </div>
+
 </template>
 
 <script>
+
 	export default {
 		name: "DatePicker",
+    props: ['dateFromSlider', 'initialValueRangeSlider'],
     data() {
 			return {
 				range: {
-					start: new Date(),
-					end: new Date()
+					start: null,
+					end: null
         }
       }
-    }
+    },
+    mounted() {
+			let object = {
+				start: new Date(),
+				end: new Date()
+			};
+
+			object.start.setFullYear(+this.initialValueRangeSlider[0]);
+			object.end.setFullYear(+this.initialValueRangeSlider[1]);
+
+			this.range = {...object};
+    },
+    watch: {
+			range() {
+				let obj = {
+					start: this.range.start,
+					end: this.range.end
+        };
+				this.$emit('changeDatePicker', obj);
+      },
+			dateFromSlider() {
+				this.changeDate(this.dateFromSlider)
+      }
+    },
+		methods: {
+			changeDate(array) {
+				let object = {
+					start: this.range.start,
+					end: this.range.end
+				};
+				object.start.setFullYear(+array[0]);
+				object.end.setFullYear(+array[1]);
+				this.range = {...object};
+			}
+		}
 	}
 </script>
 
@@ -44,6 +83,7 @@
     text-align: right;
     padding: 3px 10px 3px 25px;
     position: relative;
+    width: 135px;
     &:focus {
       outline: none;
       box-shadow: 0 0 1px rgb(110, 131, 141);
@@ -56,7 +96,7 @@
     position: relative;
     &::before {
       position: absolute;
-      top: 2px;
+      top: 0px;
       left: 10px;
       content: url("../../../img/iconInput.svg");
       width: 9px;

@@ -53,6 +53,7 @@
     },
     methods: {
 			changeSource({id, checked}) {
+				console.log({id, checked});
 				this.arraySource.forEach(item => item.id === id ? item.checked = checked : null);
 				this.$emit('arraySource', this.arraySource);
       },

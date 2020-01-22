@@ -1,23 +1,23 @@
 <template>
   <div class="wrapper-main-chart">
     <Chart2d
-      v-if="typeChart === '2d'"
+      v-if="typeChart === '2d' && dataChart2d.length"
       :data="dataChart2d"
       :groups="groups2d"
       :options="options2d"
       @click="clickByChart2d($event)"
     />
-    <NetworkChart
-      v-if="typeChart === 'Network'"
-      :nodes="nodesNetworkChart"
-      :options="optionsNetwork"
-      :edges="edgeNetworkChart"
-    />
-    <TimeLineChart
-      v-if="typeChart === 'TimeLine'"
-      :data="timeLineData"
-      :options="timeLineOptions"
-    />
+<!--    <NetworkChart-->
+<!--      v-if="typeChart === 'Network'"-->
+<!--      :nodes="nodesNetworkChart"-->
+<!--      :options="optionsNetwork"-->
+<!--      :edges="edgeNetworkChart"-->
+<!--    />-->
+<!--    <TimeLineChart-->
+<!--      v-if="typeChart === 'TimeLine'"-->
+<!--      :data="timeLineData"-->
+<!--      :options="timeLineOptions"-->
+<!--    />-->
   </div>
 </template>
 
@@ -32,9 +32,9 @@
     data() {
 			return {
 				groups2d: [
-					{ id: 0, content: "group0" },
-					{ id: 1, content: "group1" },
-					{ id: 2, content: "group2" }
+					{ id: 0, content: "Telegram" },
+					{ id: 1, content: "VK" },
+					{ id: 2, content: "FaceBook" }
 				],
 				options2d: {
 					drawPoints: {
@@ -46,17 +46,9 @@
 					},
 					dataAxis: { visible: true },
 					sort: true,
-					autoResize: true,
-					interpolation: true
-				},
-				optionsNetwork: {
-					autoResize: true,
-					height: '600px',
-					width: '100%',
-					clickToUse: true
-				},
-				timeLineOptions: {
-					editable: true
+					zoomable: false,
+					autoResize: false,
+					interpolation: false
 				}
       }
     },
