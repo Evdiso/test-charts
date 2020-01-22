@@ -47,7 +47,8 @@
 					dataAxis: { visible: true },
 					sort: true,
 					zoomable: false,
-					autoResize: false,
+					moveable: false,
+					autoResize: true,
 					interpolation: false
 				}
       }
