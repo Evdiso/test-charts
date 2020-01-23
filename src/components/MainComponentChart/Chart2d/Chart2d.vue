@@ -41,6 +41,7 @@
 		mounted() {
 			this.graph = new vis.Graph2d(this.$refs.chart2d, new vis.DataSet(this.data), this.options);
 			this.graph.setWindow(this.changesDate.firstDate, this.changesDate.lastDate);
+
 			this.graph.on('click', (event)=>{
 				this.$emit('click', event)
 			});

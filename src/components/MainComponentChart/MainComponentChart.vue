@@ -22,20 +22,18 @@
 			return {
 				type: 0,
 				groups2d: [
-					{ id: 0,
-            content: "Telegram",
-						visible: false
+					{ id: "Telegram",
+            content: "Telegram"
           },
-					{ id: 1,
-            content: "VK",
-						visible: false
+					{ id:"VK",
+            content: "VK"
           },
-					{ id: 2,
-            content: "FaceBook",
-						visible: false
+					{ id: "FaceBook",
+            content: "FaceBook"
 					}
 				],
 				options2d: {
+					defaultGroup: '',
 					drawPoints: {
 						style: 'circle', // square, circle
 						size: 10

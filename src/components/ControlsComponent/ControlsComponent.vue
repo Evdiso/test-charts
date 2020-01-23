@@ -40,9 +40,9 @@
     data() {
 			return {
         arraySource: [
-          {id: 1,text: 'Telegram', checked: true},
-					{id: 2, text: 'Facebook', checked: false},
-					{id: 3, text: 'Вконтакте', checked: false}
+          {id: 'Telegram', text: 'Telegram', checked: true},
+					{id: 'VK', text: 'VK', checked: false},
+					{id: 'Facebook', text: 'Facebook', checked: false}
         ],
 				arrayTypeChart: [
 					{id: uniqid(), text: 'График', checked: true},

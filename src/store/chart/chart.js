@@ -34,7 +34,7 @@ export default {
   actions: {
     setInitialChart2dData({commit}, array) {
       commit('setInitialChart2dData', array);
-      let newData = array.filter(item => item.group === 1);
+      let newData = array.filter(item => item.group === 'Telegram');
       commit('setNewChart2dData', newData)
     },
     setChangesDate({commit}, objectDates) {
