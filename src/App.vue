@@ -5,7 +5,9 @@
       @arrayTypeChart="arrayTypeChart($event)"
     />
     <div class="wrapper-change-date">
-      <time-list-component />
+      <time-list-component
+        @changeTime="changeTime($event)"
+      />
       <date-picker
         :dateFromSlider="dateFromSlider"
         :initialValueRangeSlider="initialValueRangeSlider"
@@ -20,7 +22,6 @@
       />
     </div>
     <main-component-chart
-      :typeChart="typeChart"
       :dataChart2d="dataChart2d.length ? dataChart2d : initialDataChart2d"
       @clickByChart2d="clickByChart2d($event)"
     />
@@ -30,8 +31,6 @@
 <script>
 
 const chart2dData = require('../dataNew');
-const chartTimeLineData = require('../chartTimeLineData');
-const chartNetworkData = require('../chartNetworkData');
 import VueSliderRange from './components/UI/VueRangeSlider/VueRangeSlider';
 import TimeListComponent from './components/TimeListComponent/TimeListComponent';
 import DatePicker from './components/UI/DatePicker/DatePicker';
@@ -45,11 +44,6 @@ export default {
   name: 'app',
 	components: {VueSliderRange, TimeListComponent, DatePicker, ControlsComponent, MainComponentChart},
   store,
-	data() {
-    return {
-
-    }
-  },
   mounted() {
     this.getData();
   },
@@ -66,39 +60,88 @@ export default {
   methods: {
 		...mapActions('chart', [
 			'setInitialChart2dData',
-			'filterChart2dData'
+			'filterChart2dData',
+      'setChangesDate'
 		]),
+		changeTime(type) {
+			//   Выбор периода (год, полгода, квартал, месяц, 2 недели, неделя)
+      let objDates = {
+      	start: '',
+        end: moment().format('YYYY-MM-DD')
+      };
+      let arrayYears = [new Date().getFullYear(), new Date().getFullYear()];
+			this.$store.commit('chart/changeInitialValueRangeSlider', arrayYears);
+
+      switch (type) {
+        case 'year':
+					objDates.start = moment(objDates.end).subtract(1, 'years').format('YYYY-MM-DD');
+					this.setChangesDate(objDates);
+					break;
+        case 'half-year':
+					objDates.start = moment(objDates.end).subtract(6, 'months').format('YYYY-MM-DD');
+					this.setChangesDate(objDates);
+        	break;
+        case 'quarter':
+					objDates.start = moment(objDates.end).subtract(3, 'months').format('YYYY-MM-DD');
+					this.setChangesDate(objDates);
+					break;
+        case 'month':
+					objDates.start = moment(objDates.end).subtract(1, 'months').format('YYYY-MM-DD');
+					this.setChangesDate(objDates);
+					break;
+        case 'two-weeks':
+					objDates.start = moment(objDates.end).subtract(14, 'days').format('YYYY-MM-DD');
+					this.setChangesDate(objDates);
+					break;
+        case 'week':
+					objDates.start = moment(objDates.end).subtract(7, 'days').format('YYYY-MM-DD');
+					this.setChangesDate(objDates);
+					break;
+        default:
+        	break;
+			}
+    },
     getData() {
+			//   Получение начальных данных для графика
       this.setInitialChart2dData(chart2dData);
     },
 		clickByChart2d(event) {
+			//   Событие клика с графика
     	console.log(event);
     },
 		changeRangeSlider(data) {
+			//   Изменение интервала времени от слайдера
 			this.$store.commit('chart/setDateFromSlider', data);
 			let obj = {
 				start: `${data[0]}-01-01`,
 				end: `${data[1]}-01-01`
 			};
-			this.filterChart2dData(obj);
+			this.setChangesDate(obj);
     },
 		arraySource(array) {
-    	console.log(array);
+			let newArray = [...array];
+			newArray = newArray.map(item => item.checked === true ? item.id : null).filter(item => item !== null);
+			this.filterChart2dData(newArray);
     },
 		arrayTypeChart(array) {
+			//   Изменение типа графика
     	const arrayTypes = array.filter(item => item.checked);
+    	let type = arrayTypes[0].text === 'График' ? 'line' : 'bar';
+			this.$store.commit('chart/setTypeChart', type);
     },
 		changeDatePicker(obj) {
+			//   Изменение интервала времени от датапикера
     	let arrayYears = [];
+			arrayYears.push(obj.start.getFullYear());
+			arrayYears.push(obj.end.getFullYear());
+
 			let objectData = {
 				start: moment(obj.start).format('YYYY-MM-DD'),
 				end: moment(obj.end).format('YYYY-MM-DD')
 			};
-			arrayYears[0] = obj.start.getFullYear();
-			arrayYears[1] = obj.end.getFullYear();
 
 			this.$store.commit('chart/changeInitialValueRangeSlider', arrayYears);
-			this.filterChart2dData(objectData);
+			this.setChangesDate(objectData);
     }
   }
 }

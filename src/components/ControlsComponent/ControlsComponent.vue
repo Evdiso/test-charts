@@ -40,10 +40,9 @@
     data() {
 			return {
         arraySource: [
-          {id: uniqid(),text: 'Telegram', checked: true},
-					{id: uniqid(), text: 'Facebook', checked: false},
-					{id: uniqid(), text: 'Вконтакте', checked: false},
-          {id: uniqid(), text: 'Одноклассники', checked: false}
+          {id: 1,text: 'Telegram', checked: true},
+					{id: 2, text: 'Facebook', checked: false},
+					{id: 3, text: 'Вконтакте', checked: false}
         ],
 				arrayTypeChart: [
 					{id: uniqid(), text: 'График', checked: true},
@@ -53,7 +52,6 @@
     },
     methods: {
 			changeSource({id, checked}) {
-				console.log({id, checked});
 				this.arraySource.forEach(item => item.id === id ? item.checked = checked : null);
 				this.$emit('arraySource', this.arraySource);
       },

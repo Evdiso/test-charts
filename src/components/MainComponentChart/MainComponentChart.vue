@@ -1,23 +1,12 @@
 <template>
   <div class="wrapper-main-chart">
     <Chart2d
-      v-if="typeChart === '2d' && dataChart2d.length"
+      v-if="dataChart2d.length"
       :data="dataChart2d"
       :groups="groups2d"
       :options="options2d"
       @click="clickByChart2d($event)"
     />
-<!--    <NetworkChart-->
-<!--      v-if="typeChart === 'Network'"-->
-<!--      :nodes="nodesNetworkChart"-->
-<!--      :options="optionsNetwork"-->
-<!--      :edges="edgeNetworkChart"-->
-<!--    />-->
-<!--    <TimeLineChart-->
-<!--      v-if="typeChart === 'TimeLine'"-->
-<!--      :data="timeLineData"-->
-<!--      :options="timeLineOptions"-->
-<!--    />-->
   </div>
 </template>
 
@@ -28,26 +17,37 @@
 	export default {
 		name: "MainComponentChart",
     components: {Chart2d, NetworkChart, TimeLineChart},
-    props: ['typeChart', 'dataChart2d','timeLineData', 'nodesNetworkChart', 'edgeNetworkChart'],
+    props: ['dataChart2d'],
     data() {
 			return {
+				type: 0,
 				groups2d: [
-					{ id: 0, content: "Telegram" },
-					{ id: 1, content: "VK" },
-					{ id: 2, content: "FaceBook" }
+					{ id: 0,
+            content: "Telegram",
+						visible: false
+          },
+					{ id: 1,
+            content: "VK",
+						visible: false
+          },
+					{ id: 2,
+            content: "FaceBook",
+						visible: false
+					}
 				],
 				options2d: {
 					drawPoints: {
 						style: 'circle', // square, circle
 						size: 10
 					},
+          legend: true,
 					shaded: {
 						orientation: 'bottom' // top, bottom
 					},
 					dataAxis: { visible: true },
 					sort: true,
-					zoomable: false,
-					moveable: false,
+					zoomable: true,
+					moveable: true,
 					autoResize: true,
 					interpolation: false
 				}

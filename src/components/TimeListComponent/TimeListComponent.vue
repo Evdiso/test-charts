@@ -16,7 +16,7 @@
 		name: "TimeListComponent",
     methods: {
 			changeTime(type) {
-				console.log(type)
+				this.$emit('changeTime', type);
       }
     }
 	}

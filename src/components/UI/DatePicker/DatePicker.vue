@@ -16,7 +16,7 @@
 </template>
 
 <script>
-
+	import { mapState } from 'vuex'
 	export default {
 		name: "DatePicker",
     props: ['dateFromSlider', 'initialValueRangeSlider'],
@@ -28,6 +28,11 @@
         }
       }
     },
+		computed: {
+			...mapState({
+				changesDateOut: state => state.chart.changesDate
+			})
+		},
     mounted() {
 			let object = {
 				start: new Date(),
