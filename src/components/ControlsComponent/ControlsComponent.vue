@@ -20,6 +20,7 @@
         <li v-for="chart in arrayTypeChart"
             :key="chart.id">
           <check-box-control
+            :type="'radio'"
             @changeCheckBox="changeTypeChart($event)"
             :data="chart"
           />

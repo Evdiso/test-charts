@@ -112,7 +112,7 @@ export default {
 						content: item.y,
             className: 'custom-label'
           },
-          group:"Telegram"
+          group: item.group
         };
       	return obj
       });
