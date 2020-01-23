@@ -33,6 +33,12 @@
 
 <style scoped lang="scss">
   .wrapper-checkbox {
+    display: flex;
+    align-items: center;
+    button {
+      margin-right: 5px;
+      background-color: #fff;
+    }
     &:hover {
       cursor: pointer;
     }

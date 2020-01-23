@@ -103,7 +103,21 @@ export default {
     },
     getData() {
 			//   Получение начальных данных для графика
-      this.setInitialChart2dData(chart2dData);
+      let array = [...chart2dData];
+      array = array.map(item => {
+      	let obj = {
+					x: item.x,
+          y: item.y,
+          label: {
+						content: item.y,
+            className: 'custom-label'
+          },
+          group:"Telegram"
+        };
+      	return obj
+      });
+
+      this.setInitialChart2dData(array);
     },
 		clickByChart2d(event) {
 			//   Событие клика с графика
